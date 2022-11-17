@@ -1,0 +1,72 @@
+\chapter{Einleitung}
+\label{ch:einleitung}
+
+In \ac{TLS} 1.3 wird ein Handshake durchgeführt, bei dem ein Schlüsselaustausch sowie die Authentifizierung des Servers gegenüber dem Client durchgeführt wird. Bei Bedarf kann auch eine beidseitige Authentifizierung durchgeführt werden. Erst im Anschluss findet die eigentliche Kommunikation statt. Aktuell werden dabei für die Authentifizierung die klassischen asymmetrischen Verfahren \ac{EdDSA}, \ac{ECDSA} und \ac{RSA} verwendet. In dieser Arbeit soll betrachtet werden, inwiefern sich die Performanz von TLS 1.3 verändert, wenn stattdessen \ac{PQC} Verfahren, d. h. kryptographische Verfahren, die gegen Quantencomputer resistent sind, eingesetzt werden.
+
+	\section{Motivation}
+	\label{sec:einleitung:motivation}
+
+	Die Entwicklung von Quantencomputern schreitet voran. Wenn Quantencomputer jedoch einsatzfähig sind, wird es mit ihnen möglich sein, viele der aktuell verwendeten kryptographischen Algorithmen zu brechen. Dies liegt daran, dass diese auf Berechnungen basieren, die auf klassischen Computern nicht in einer vertretbaren Zeit durchführbar sind. Dies sind vor allem die Primfaktorzerlegung und der diskrete Logarithmus. Quantencomputer können diese Berechnungen aufgrund ihrer Eigenschaften jedoch schneller durchführen. Davon sind auch die im TLS 1.3 Handshake verwendeten Algorithmen betroffen.\\
+
+	Um zu verhindern, dass hierdurch Probleme entstehen, müssen rechtzeitig PQC-Algorithmen identifiziert werden, mit denen die dann unsicherern Algorithmen ersetzt werden können. Dabei ist zu beachten, dass diese andere Charakteristika haben. Damit der Einsatz von PQC-Algorithmen gelingen kann, muss bekannt sein, wie sich diese unter verschiedenen Netzwerkbedingungen verhalten.
+
+	\section{Problemstellung und Ziel}
+	\label{sec:einleitung:problemstellung}
+
+	In dieser Arbeit sollen die klassischen kryptographischen Algorithmen, die bei TLS 1.3 zur Authentifizierung verwendet werden, durch PQC-Algorithmen, wie z. B. \ac{FALCON}, ersetzt werden. In dem Auswahlprozess der \ac{NIST} haben sich dabei besonders \ac{CRYSTALS} Dilithium, FALCON und SPHINCS+ als vielversprechende Kandidaten für Algorithmen zur digitalen Signatur hervorgetan.\\
+	
+	Allerdings ist in der realen Welt kein ideales Netzwerk vorhanden und es treten Störfaktoren, wie etwa der Verlust von Paketen oder Latenz auf. Diese Störfaktoren haben einen Einfluss auf die Performanz des Algorithmus. Da TLS 1.3 jedoch ein Protokoll ist, das an verschiedenen Stellen in der Praxis zum Einsatz kommt und hier die Performanz durchaus eine wichtige Rolle spielt, ist die Performanz für den Benutzer von großer Bedeutung.\\
+	
+	In dieser Arbeit soll zunächst nur die Authentifizierung mittels PQC-Verfahren durchgeführt werden. Es wird angenommen, dass für den Schlüsselaustausch ein klassisches Verfahren verwendet wird. Dieses bleibt bei allen Versuchen unverändert, sodass nur Auswirkungen durch die Verwendung von PQC-Algorithmen in der Authentifizierungsphase auf die Performanz des TLS-Handshake bewertet werden.\\
+	
+	Die konkrete Fragestellung der Arbeit ist, inwiefern sich die Performanz des Handshakes von TLS 1.3 unter der Verwendung verschiedener PQC-Algorithmen in der Authentifizierungsphase verändert, wenn verschiedene Netzwerkparameter manipuliert werden.\\
+	
+	Ziel der Arbeit ist es, daraus ableiten zu können, welche Algorithmen für die Verwendung in der Authentifizierungsphase von TLS 1.3 unter realen Netzwerkbedingungen geeignet sind. Dies ist relevant für die Verwendung des Algorithmus in einer Netzwerkumgebung.
+
+	\section{Related Work}
+	\label{sec:einleitung:related}
+	
+	Crockett et al. entwarfen 2019 eine Implementierung von PQC im TLS 1.3 Handshake. Dabei wurden verschiedene, in der Literatur vorhandene Grundkonzepte diskutiert \cite{Crockett2019}. Dabei geben sie eine Empfehlung, wie eine Implementierung aussehen kann. In der Arbeit selbst wird darauf hingewiesen, dass eine Prüfung der Algorithmen sowohl unter Veränderung einzelner Netzwerkparameter als auch unter realistischen Netzwerkbedingungen notwendig ist.\\
+	
+	Paul et al. untersuchten 2022, wie Zertifkatsketten für die Authentifizierung mit PQC-Verfahren aussehen könnten \cite{Paul2022}. Dabei verwenden sie ''Mixed Certificate Chains'', bei denen innerhalb derselbsen Zertifikatskette verschiedene Algorithmen angewandt werden. Diese Arbeit soll diese Konzepte aufgreifen, sie betrachtet jedoch, wie sich die Performanz des Handshakes bei der Veränderung einzelner Netzwerkparameter verhält.\\
+	
+	Henrich hat in ihrer Masterarbeit untersucht, wie sich die Verwendung von PQC-Algorithmen im Schlüsselaustausch von TLS1.3 unter veschiedenen Netzwerkbedingungen verhält \cite{Henrich2022}. Sie kommt dabei zu dem Ergebnis, dass insbesondere Kyber, Saber, NTRU und NTRU Prime auch bei variierenden Netzwerkparametern eine sehr gute Performanz haben und teils noch schneller als \ac{ECDH} sind. In Analogie dazu soll in dieser Arbeit die Authentifizierung betrachtet werden.\\
+	
+	Das dabei verwendete Framework zur Emulation verschiedener Netzwerkszenarien wurde in einer Arbeit von Paquin et al. aus dem Jahr 2020 \cite{Paquin2020} vorgestellt.\\
+	
+	Eine weitere Arbeit in diesem Bereich stammt von Sikeridis et al. aus dem Jahr 2020 und beschäftigt sich bereits mit der Performanz von PQC-Verfahren zur Authentikation in TLS 1.3 \cite{Sikeridis2020}. In dieser Arbeit wurde der TLS 1.3 Handshake zwischen einem Client und realen Servern in verschiedenen Staaten durchgeführt, um zu überprüfen, inwiefern dies Auswirkungen auf die Performanz der Algorithmen hat. Diese Arbeit soll sich davon abgrenzen, indem sie gezielt einzelne Netzwerkparameter in einer Emulation manipuliert. Damit soll herausgefunden werden, welche Parameter einen entscheidenden Einfluss auf die Performanz haben.\\
+
+	\section{Vorgehensweise}
+	\label{sec:einleitung:vorgehensweise}
+	
+	Für diese Arbeit soll in einem Linux-Kernel der Aufbau einer TLS 1.3 Verbindung zwischen einem Server und einem Client durchgeführt werden. Dies geschieht unter verschiedenen Netzwerkparametern sowie mit verschiedenen PQC-Algorithmen in der Authentifizierungsphase von TLS 1.3.\\
+	
+	Dafür wird für verschiedene PQC-Algorithmen eine Reihe an Versuchen durchgeführt, in denen verschiedene Netzwerkcharakteristiken verändert werden. Nach der erfolgreichen Authentifizierung des Servers gegenüber dem Client wird die Verbindung abgebrochen. Die Zeit zwischen dem Aufbau und dem Abbau der Verbindung wird gemessen und dient als Vergleichsgröße. Diese Versuche sollen ebenfalls unter verschiedenen Sicherheitsleveln durchgeführt werden.\\
+	
+	Für den Verbindungsaufbau zwischen Client und Server werden Linux-Kernel-Tools verwendet. Die verschiedenen Netzwerkparameter werden mithilfe des Tools NetEm emuliert. Dabei sollen Veränderungen an folgenden Parametern betrachtet werden:
+
+	\begin{itemize}
+		\item Duplikate	
+		\item Jitter
+		\item Korrupte Pakete
+		\item Latenz
+		\item Paketverlust
+		\item Reordering
+		\item Übertragungsrate
+	\end{itemize}
+
+	Diese werden zunächst einzeln betrachtet. Da sie in der Realität jedoch gemeinsam auftreten, können in einem späteren Versuch auch verschiedene Netzwerkparameter miteinander kombiniert werden.\\
+	
+	Die eigentliche Authentifizierung wird mithilfe der \ac{OQS} Library \cite{Stebila2017} durchgeführt. Aufgrund des aktuellen Stands der NIST-Empfehlungen werden die folgenden Algorithmen betrachtet:
+	
+	\begin{itemize}
+		\item SPHINCS\textsuperscript{+}
+		\item Dilithium
+		\item Falcon
+	\end{itemize}
+
+	Gegebenenfalls sollen die Ergebnisse in einer realen Netzwerkumgebung mit einem Server aus einer Cloudinstanz bestätigt werden. Dies soll jedoch nicht Kern der Arbeit sein.\\
+	
+	Nach der Durchführung der Versuche sollten ausführliche Daten dazu vorliegen, wie sich die Laufzeit von TLS 1.3 unter verschiedenen Algorithmen, Algorithmenparametern und Netzwerkcharakteristiken verhält. Diese sollen im Anschluss miteinander verglichen werden.\\
+	
+	Dabei werden sich voraussichtlich große Unterschiede zwischen den betrachteten Algorithmen zeigen. Aus dem Vergleich der Performanz von TLS 1.3 soll eine Empfehlung gegeben werden, welche Algorithmen für welche Art von Netzwerk am besten geeignet sind.

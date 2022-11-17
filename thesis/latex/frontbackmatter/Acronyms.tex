@@ -1,0 +1,49 @@
+%*******************************************************
+% Acronyms
+%*******************************************************
+\automark[section]{chapter}
+\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
+\refstepcounter{dummy}
+\pdfbookmark[0]{Abk\"{u}rzungsverzeichnis}{abkuerzungsverzeichnis}
+\markboth{\spacedlowsmallcaps{Abk\"{u}rzungsverzeichnis}}{\spacedlowsmallcaps{Abk\"{u}rzungsverzeichnis}}
+\chapter*{Abk\"{u}rzungsverzeichnis}
+
+% Insert your acronyms here
+\begin{acronym}[UML]
+	
+	\acro{AES}{Advanced Encryption Standard}
+	
+	\acro{CRYSTALS}{Cryptographic Suite for Algebraic Lattices}
+	
+	\acro{CBC}{Cipher Block Chaining}
+	\acro{DES}{Data Encryption Standard}
+	
+	\acro{ECDH}{Elliptic-curve Diffie-Hellman}
+	\acro{ECDSA}{Elliptic Curve Digital Signature Algorithm}
+	\acro{EdDSA}{Edwards-curve Digital Signature Algorithm}
+	
+	\acro{FALCON}{Fast Fourier lattice-based compact signatures over NTRU}
+	
+	\acro{GAN}{Global Area Network}
+	
+	\acro{IETF}{Internet Engineering Task Force}
+	
+	\acro{MAC}{Message Authentication Code}
+	\acro{NIST}{National Institute of Standards and Technology}
+		
+	\acro{OQS}{Open Quantum Safe}
+	\acro{OSI}{Open Systems Interconnection}
+	
+	\acro{PAN}{Personal Area Network}
+	
+	\acro{PQC}{Post-Quanten-Kryptographie}
+	
+	\acro{RSA}{Rivet-Shamir-Adleman}
+	\acro{SHA}{Secure Hash Algorithm}
+	
+  	\acro{TLS}{Transport Layer Security}
+  	
+\end{acronym}
+
+\cleardoublepage
