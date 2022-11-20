@@ -27,9 +27,9 @@ def run_subprocess(command, working_dir='.', expected_returncode=0):
         stderr=subprocess.PIPE,
         cwd=working_dir
     )
-    #if (result.stderr):
-    #    print(result.stderr)
-    #assert result.returncode == expected_returncode
+    if (result.stderr):
+        print(result.stderr)
+    assert result.returncode == expected_returncode
     return result.stdout.decode('utf-8')
 
 # creates certificates to be used during handshake
@@ -54,7 +54,7 @@ def run_teardown():
 def time_handshake(sig_alg, measurements):
     command = [
         'ip', 'netns', 'exec', 'cli_ns',
-        './s_timer.o', 'prime256v1', str(measurements)
+        './s_timer.o', 'kyber512', str(measurements)
     ]
     result = run_subprocess(command)
     return [float(i) for i in result.strip().split(',')]
