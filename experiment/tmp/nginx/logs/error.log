@@ -18,3 +18,6 @@
 2022/11/20 11:41:37 [error] 10164#0: open() "/home/ronja/Dokumente/h_da_ws22/experiment/tmp/nginx/logs/nginx.pid" failed (2: No such file or directory)
 2022/11/20 11:41:51 [notice] 10243#0: signal process started
 2022/11/20 11:42:05 [notice] 10307#0: signal process started
+2022/11/20 11:54:40 [notice] 13341#0: signal process started
+2022/11/20 12:21:08 [notice] 19109#0: signal process started
+2022/11/20 12:28:18 [notice] 19939#0: signal process started
