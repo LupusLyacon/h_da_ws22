@@ -27,6 +27,9 @@ def run_subprocess(command, working_dir='.', expected_returncode=0):
         stderr=subprocess.PIPE,
         cwd=working_dir
     )
+    #if (result.stderr):
+    #    print(result.stderr)
+    #assert result.returncode == expected_returncode
     return result.stdout.decode('utf-8')
 
 # creates certificates to be used during handshake

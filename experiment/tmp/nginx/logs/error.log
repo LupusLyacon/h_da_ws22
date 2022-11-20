@@ -10,3 +10,11 @@
 2022/11/20 11:05:56 [error] 4488#0: open() "/home/ronja/Dokumente/h_da_ws22/experiment/tmp/nginx/logs/nginx.pid" failed (2: No such file or directory)
 2022/11/20 11:10:10 [notice] 5213#0: signal process started
 2022/11/20 11:10:10 [error] 5213#0: open() "/home/ronja/Dokumente/h_da_ws22/experiment/tmp/nginx/logs/nginx.pid" failed (2: No such file or directory)
+2022/11/20 11:38:19 [notice] 9825#0: signal process started
+2022/11/20 11:38:19 [error] 9825#0: open() "/home/ronja/Dokumente/h_da_ws22/experiment/tmp/nginx/logs/nginx.pid" failed (2: No such file or directory)
+2022/11/20 11:40:28 [notice] 9981#0: signal process started
+2022/11/20 11:40:38 [notice] 10043#0: signal process started
+2022/11/20 11:41:37 [notice] 10164#0: signal process started
+2022/11/20 11:41:37 [error] 10164#0: open() "/home/ronja/Dokumente/h_da_ws22/experiment/tmp/nginx/logs/nginx.pid" failed (2: No such file or directory)
+2022/11/20 11:41:51 [notice] 10243#0: signal process started
+2022/11/20 11:42:05 [notice] 10307#0: signal process started
