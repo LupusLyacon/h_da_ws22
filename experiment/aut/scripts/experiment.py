@@ -108,6 +108,8 @@ def setup(name_of_scenariofile):
 
 timer_pool = Pool(processes=POOL_SIZE)
 
+print("program start")
+
 scenariofiles = []
 # Check for handed scenarios
 if len(sys.argv) > 1:
@@ -117,43 +119,54 @@ if len(sys.argv) > 1:
 else:
         scenariofiles.append(DEFAULT_SCENARIO_TO_TEST)
 
-for scenariofile in scenariofiles:
-        paramsets = []
-        directory = setup(scenariofile)
+index = 0
+for algorithmclass in algorithmlist:
+    print("checkpoint alfa " + algorithmclass)
+
+    for sig_alg in algorithmclass:
+
+        print("checkpoint bravo " + sig_alg)
+
+        for scenariofile in scenariofiles:
+                paramsets = []
+                directory = setup(scenariofile)
+
+                print("checkpoint charlie " + scenariofile)
 
 
 
-        # set network parameters of scenario
-        for paramset in paramsets:
+                # set network parameters of scenario
+                for paramset in paramsets:
 
-                index = 0
-                for algorithmclass in algorithmlist:
-                        for sig_alg in algorithmclass:
+                    print("checkpoint delta " + paramset)
 
-                                    run_setup(sig_alg)
-                                    # To get actual (emulated) RTT
-                                    networkmgmt.change_qdisc('srv_ns', 'srv_ve', 0, paramsets[0][2], 0, 0, 0, 0,
-                                                             paramsets[0][7])
-                                    networkmgmt.change_qdisc('cli_ns', 'cli_ve', 0, paramsets[0][9], 0, 0, 0, 0,
-                                                             paramsets[0][14])
-                                    rtt_str = networkmgmt.get_rtt_ms()
+                    #run_setup(sig_alg)
 
-                                    networkmgmt.change_qdisc('srv_ns', 'srv_ve', paramset[1], paramset[2], paramset[3],
-                                                             paramset[4], paramset[5], paramset[6], paramset[7])
-                                    networkmgmt.change_qdisc('cli_ns', 'cli_ve', paramset[8], paramset[9], paramset[10],
-                                                             paramset[11], paramset[12], paramset[13], paramset[14])
+                    # To get actual (emulated) RTT
+                    #networkmgmt.change_qdisc('srv_ns', 'srv_ve', 0, paramsets[0][2], 0, 0, 0, 0,
+                                                                     #paramsets[0][7])
+                    #networkmgmt.change_qdisc('cli_ns', 'cli_ve', 0, paramsets[0][9], 0, 0, 0, 0,
+                                                                     #paramsets[0][14])
+                    #rtt_str = networkmgmt.get_rtt_ms()
 
-                                    print('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg))
-                                    with open('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg),'a') as out:
-                                            csv_out = csv.writer(out)
-                                            result = run_timers(sig_alg, timer_pool)
-                                            result.insert(0, '{}'.format(ROW_NAMES[index]))
-                                            csv_out.writerow(result)
+                    #networkmgmt.change_qdisc('srv_ns', 'srv_ve', paramset[1], paramset[2], paramset[3],
+                                                                     #paramset[4], paramset[5], paramset[6], paramset[7])
+                    #networkmgmt.change_qdisc('cli_ns', 'cli_ve', paramset[8], paramset[9], paramset[10],
+                                                                     #paramset[11], paramset[12], paramset[13], paramset[14])
 
-                                    run_teardown()
+                    #print('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg))
+                    #with open('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg),'a') as out:
+                        #csv_out = csv.writer(out)
+                        #result = run_timers(sig_alg, timer_pool)
+                        #result.insert(0, '{}'.format(ROW_NAMES[index]))
+                        #csv_out.writerow(result)
 
-                        index = index + 1
+                    #run_teardown()
+
+
         scenariodescription.pop(0)
+
+    index = index + 1
 
 timer_pool.close()
 timer_pool.join()
