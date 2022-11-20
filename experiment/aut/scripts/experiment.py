@@ -122,46 +122,40 @@ else:
 
 index = 0
 
+# running through algorithm list first
 read_algorithms()
 for algorithmclass in algorithmlist:
     for sig_alg in algorithmclass:
 
+        # create certificates etc
         run_setup(sig_alg)
 
+        # run through sceanrios
         for scenariofile in scenariofiles:
                 paramsets = []
                 directory = setup(scenariofile)
 
-
-
                 # set network parameters of scenario
                 for paramset in paramsets:
 
-
-
-
-
-                                            # To get actual (emulated) RTT
-                                            networkmgmt.change_qdisc('srv_ns', 'srv_ve', 0, paramsets[0][2], 0, 0, 0, 0,
+                    # To get actual (emulated) RTT
+                    networkmgmt.change_qdisc('srv_ns', 'srv_ve', 0, paramsets[0][2], 0, 0, 0, 0,
                                                                      paramsets[0][7])
-                                            networkmgmt.change_qdisc('cli_ns', 'cli_ve', 0, paramsets[0][9], 0, 0, 0, 0,
+                    networkmgmt.change_qdisc('cli_ns', 'cli_ve', 0, paramsets[0][9], 0, 0, 0, 0,
                                                                      paramsets[0][14])
-                                            rtt_str = networkmgmt.get_rtt_ms()
+                    rtt_str = networkmgmt.get_rtt_ms()
 
-                                            networkmgmt.change_qdisc('srv_ns', 'srv_ve', paramset[1], paramset[2], paramset[3],
+                    networkmgmt.change_qdisc('srv_ns', 'srv_ve', paramset[1], paramset[2], paramset[3],
                                                                      paramset[4], paramset[5], paramset[6], paramset[7])
-                                            networkmgmt.change_qdisc('cli_ns', 'cli_ve', paramset[8], paramset[9], paramset[10],
+                    networkmgmt.change_qdisc('cli_ns', 'cli_ve', paramset[8], paramset[9], paramset[10],
                                                                      paramset[11], paramset[12], paramset[13], paramset[14])
 
-                                            print('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg))
-                                            with open('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg),'a') as out:
-                                                    csv_out = csv.writer(out)
-                                                    result = run_timers(sig_alg, timer_pool)
-                                                    result.insert(0, '{}'.format(ROW_NAMES[index]))
-                                                    csv_out.writerow(result)
-
-
-
+                    print('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg))
+                    with open('{}/{}/{}.csv'.format(directory, algorithm_class_descriptions[index], sig_alg),'a') as out:
+                        csv_out = csv.writer(out)
+                        result = run_timers(sig_alg, timer_pool)
+                        result.insert(0, '{}'.format(ROW_NAMES[index]))
+                        csv_out.writerow(result)
 
                 scenariodescription.pop(0)
         run_teardown()
