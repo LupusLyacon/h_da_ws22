@@ -1,7 +1,0 @@
-delay_minRate,srv_pkt_loss,srv_delay,srv_jitter,srv_duplicate,srv_corrupt,srv_reorder,srv_rate,cli_pkt_loss,cli_delay,cli_jitter,cli_duplicate,cli_corrupt,cli_reorder,cli_rate
-,0,2.5ms,0,0,0,0,2,0,2.5ms,0,0,0,0,2
-,0,10ms,0,0,0,0,2,0,10ms,0,0,0,0,2
-,0,30ms,0,0,0,0,2,0,30ms,0,0,0,0,2
-,0,80ms,0,0,0,0,2,0,80ms,0,0,0,0,2
-,0,120ms,0,0,0,0,2,0,120ms,0,0,0,0,2
-,0,180ms,0,0,0,0,2,0,180ms,0,0,0,0,2
