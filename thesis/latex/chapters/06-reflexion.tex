@@ -1,0 +1,22 @@
+\chapter{Reflexion}
+\label{ch:ref}
+
+	\section{Beantwortung der Fragestellung}
+	\label{sec:ref:frage}
+	
+	In Abschnitt \ref{sec:einleitung:problemstellung} wurde als Ziel für diese Arbeit festgesetzt, zu prüfen, inwiefern sich die Testszenarien Latenz (vgl. Abschnitt \ref{sec:ergebnis:latenz}), Paketverlust (vgl. Abschnitt \ref{sec:ergebnis:verlust}), Doppelte Pakete (vgl. Abschnitt \ref{sec:ergebnis:doppelt}) sowie Begrenzung der Bandbreite (vgl. Abschnitt \ref{sec:ergebnis:bandbreite}) auf die Dauer eines TLS-Handshakes auswirken.\\
+	
+	Dies konnte in den Kapiteln \ref{ch:ergebnis} und \ref{ch:fazit} beantwortet werden.\\
+	
+	Darüber hinaus konnte eine allgemeine Handlungsempfehlung gegeben werden, welche Algorithmen aufgrund der Ergebnisse dieser Arbeit für den praktischen Einsatz bevorzugt werden sollten.
+
+	\section{Verbleibende Arbeiten}
+	\label{sec:ref:schwächen}
+	
+	Die in dieser Arbeit beschriebenen Experimente wurden auf einem Dell-Notebook der Reihe Inspiron3501 mit Ubuntu 22.04 1 LTS durchgeführt. Auch wenn während der Versuche die Internetverbindung getrennt wurde, handelt es sich hierbei nicht um eine vollständig abgeriegelte Laborumgebung und es kann durch unabhängige Prozesse auf dem Notebook zu einer Beeinflussung der Messergebnisse gekommen sein. Dies soll durch das Verwenden eines Durchschnittswert bei der Auswertung vermindert werden, kann jedoch nicht vollständig ausgeschlossen werden. Gleichzeitig wirken mitwirkende Protokolle wie z. B. TCP auf das Messergebnis ein.\\
+	
+	Weiterhin wurden in dieser Arbeit nur ausgewählte Algorithmen betrachtet. Sinnvoll wäre hier aufgrund des NIST-Auswahlverfahrens (vgl. Abschnitt \ref{subsec:grundlagen:pqc:verfahren}) eine Erweiterung der betrachteten Algorithmen um Sphincs+ und in einem weiteren Schritt um Rainbow, GeMSS und Picnic. Außerdem können weitere Testszenarien hinzugefügt werden.\\
+	
+	Während in dieser Arbeit Netzwerkparameter isoliert betrachtet wurden, tritt in der Praxis selten nur die Veränderung eines einzelnen Netzwerkparameters auf. Um eine realistischere Aussage zum verhalten der Algorithmen in einem realen Netzwerk treffen zu können, wäre es nötig, zunächst zu studieren, aus welchen Parametern sich ein reales Netzwerk zusammensetzt und eine entsprechende Kombination dieser Parameter zu testen.\\
+	
+	Weiterhin wurden in dieser Arbeit einige Phänomene beobachtet, die im Umfang dieser Arbeit nicht abschließend geklärt werden können. Dies ist der Fall bei den signifikanten Spitzen, die bei einer Veränderung des Paketverlusts auftraten.

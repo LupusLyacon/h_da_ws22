@@ -1,0 +1,119 @@
+\chapter{Methodik}
+\label{ch:methodik}
+
+	\section{Installation}
+	\label{sec:methodik:installation}
+	Der in dieser Arbeit verwendete Code basiert auf den Arbeiten von Pqeuin, Stebila und Temvada \cite{Paquin2020} sowie Henrich \ref{Henrich2022} und wurde auf die Bedürfnisse dieser Arbeit angepasst. Der Code ist auf GitHub \footnote{\url{https://github.com/LupusLyacon/h_da_ws22}, Letzter Zugriff am 12.12.2022} verfügbar.\\
+	
+	Mithilfe des Skripts install-prereqs-ubuntu können alle benötigten Komponenten installiert werden.\\
+	
+	In dieser Arbeit werden die Experimente auf einem Dell-Notebook der Reihe Inspiron3501 mit Ubuntu 22.04 durchgeführt.
+
+	\section{Genereller Versuchsaufbau}
+	\label{sec:methodik:aufbau}
+	
+	Nach der Installation kann mithilfe des Skripts run.sh der gesamte Versuchsablauf gestartet werden. In run.sh kann spezifiziert werden, welche Testszenarien durchlaufen werden sollen. Die CSV-Datei algorithms spezifiziert, welche Algorithmen betrachtet werden.\\
+	
+	Für jeden der betrachteten Algorithmen werden zunächst die benötigten X.509-Zertifikate für Client und Server mit dem gewählten Signaturalgorithmus erstellt. Mithilfe dieser Zertifikate werden die in den Testszenarien beschriebenen Netzwerkparameter mithilfe von NetEM emuliert. Jede Messreihe wird dabei für diese Arbeit 20-Mal ausgeführt. Dieser Wert ist jedoch in der Datei experiment.py veränderbar.
+	
+	\section{Betreachtete Algorithmen}
+	\label{sec:methodik:alg}
+	
+		\subsection{CRYSTALS Dilithium}
+		\label{subsec:methodik:alg:dilithium}
+		
+		Dilithium ist ein gitterbasierter Signaturalgorithmus, dessen Sicherheit darauf basiert, dass der kürzeste Vektor in einem 				solchen Gittersystem ohne zusätzliche Informationen nur schwer gefunden werden kann. In der zweiten Runde des NIST-PQC-				Verfahrens wurde eine neue Variante des Algorithmus (Dilithium-AES) eingereicht. Diese nutzt AES-256 im Counter-Modus anstelle 		von SHAKE, um die Matrix zu erweitern, Vektoren zu maskieren und um geheime Polynome zu testen \cite{Dilithium-HP}.\\
+		
+		Weitere verwendete Versionen sind p256\_dilithium2, p384\_dilithium3 und p521\_dilithium5. Diese integrieren ECDSA mit den vom 		NIST für bestimmte Kommunikationskanäle vorgeschriebenen elliptischen Kurven NIST P-256, NIST P-384 \cite{Bernstein} bzw. NIST 		P-521. Es gibt auch eine Dilithium-Variante, die RSA-3072 integriert.\\
+		
+		Im Folgenden werden die Sicherheitsparameter der verschiedenen Dilithium-Versionen kurz dargestellt \cite{OQS-Dilithium}:		
+		
+		\begin{center}
+			\begin{tabular}{|l|l|l|l|l|}
+				\hline	
+				Kürzel 					& SL 	& Schlüssel (pk) 	& Schlüssel (sk) 	& Unterschrift 	\\
+				\hline
+				dilithium2 				& 2 		& 1.312 bytes 		& 2.528 bytes		& 2.420 bytes	\\
+				p256\_dilithium2			& 2 		& 1.312 bytes  		& 2.528 bytes		& 2.420 bytes	\\
+				rsa3072\_dilithium2		& 2 		& 1.312 bytes  		& 2.528 bytes		& 2.420 bytes	\\
+				dilithium2\_aes 			& 2 		& 1.312 bytes 		& 2.528 bytes		& 2.420 bytes	\\
+				p256\_dilithium2\_aes	& 2 		& 1.312 bytes 		& 2.528 bytes		& 2.420 bytes	\\
+				\hline
+				dilithium3 				& 3 		& 1.952 bytes 		& 4.000 bytes		& 3.293 bytes	\\
+				p384\_dilithium3			& 3 		& 1.952 bytes 		& 4.000 bytes		& 3.293 bytes	\\
+				dilithium3\_aes 			& 3 		& 1.952 bytes 		& 4.000 bytes		& 3.293 bytes	\\
+				p384\_dilithium3\_aes	& 3 		& 1.952 bytes 		& 4.000 bytes		& 3.293 bytes	\\
+				\hline
+				dilithium5 				& 5 		& 2.592 bytes 		& 4.864 bytes		& 4.595 bytes	\\
+				p521\_dilithium5			& 5 		& 2.592 bytes 		& 4.864 bytes		& 4.595 bytes	\\
+				dilithium5\_aes 			& 5 		& 2.592 bytes 		& 4.864 bytes		& 4.595 bytes	\\
+				p521\_dilithium5\_aes	& 5 		& 2.592 bytes 		& 4.864 bytes		& 4.595 bytes	\\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		\subsection{FALCON}
+		\label{subsec:methodik:alg:falcon}
+		
+		Falcon ist, wie auch Dilithium, ein gitterbasiertes Kryptosystem. Es basiert jedoch auf dem ''Short Integer Solution Problem'' 		und nutzt das ''Fast Fourier Sampling'' \cite{Falcon-HP}. Auch bei Falcon gibt es Versionen, die ECDSA mit den elliptischen 			Kurven NIST P-256 und NIST P-251 bzw. RSA-3072 integrieren.\\
+		
+		Im Folgenden werden die Sicherheitsparameter der verschiedenen Falcon-Versionen kurz dargestellt \cite{OQS-Falcon}:		
+		
+		\begin{center}
+			\begin{tabular}{|l|l|l|l|l|}
+				\hline	
+				Kürzel 					& SL 	& Schlüssel (pk) 	& Schlüssel (sk) 	& Unterschrift 	\\
+				\hline
+				falcon512 				& 1		& 897 bytes			& 1.281 bytes		& 690 bytes		\\
+				p256\_falcon512 			& 1		& 897 bytes			& 1.281 bytes		& 690 bytes		\\
+				rsa3072\_falcon512 		& 1		& 897 bytes			& 1.281 bytes		& 690 bytes		\\
+				\hline
+				falcon1024 				& 5 		& 1.793 bytes		& 2.305 bytes		& 1.330 bytes	\\
+				p521\_falcon1024 		& 5		& 1.793 bytes		& 2.305 bytes		& 1.330 bytes	\\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+	\section{Szenarien}
+	\label{sec:methodik:szenarien}
+	
+		\subsection{Latenz}
+		\label{subsec:methodik:szenarien:latenz}
+		
+		In diesem Szenario wird jedes Paket in der Emulation mit einer Verzögerung um den angegebenen Wert gesendet. Der folgende 				Befehl würde beispielsweise eine Verzögerung um 100ms bewirken:\\
+		
+		\begin{lstlisting}
+	# tc qdisc add dev eth0 root netem delay 100ms
+		\end{lstlisting}
+		
+		Es wäre technisch ebenfalls möglich, jedem Paket eine zufällige Verzögerung zuzuordnen. In dieser Arbeit wurde sich jedoch 				dagegen entschieden, um möglichst vergleichbare Ergebnisse zu erhalten.	
+		
+		\subsection{Vertauschte Paketreihenfolge}
+		\label{subsec:methodik:szenarien:reihenfolge}
+		
+		Ein Vertauschen der Paketreihenfolge ist in der Emulation technisch möglich und war in dieser Arbeit ursprünglich auch 				Verzögerung von 10ms gesendet werden. Dies sorgt dafür, dass eine Auswertung über die Handshake-Dauer nicht sinnvoll umsetzbar 		ist, da das Vertauschen von mehr Paketen in diesem Fall zu einer kürzeren Handshake-Dauer führen würde.\\
+		
+		Daraus lässt sich jedoch keine sinnvolle Aussage über die Dauer eines realen Handshakes ableiten. Deshalb wird dieses Szenario 		im weiteren Verlauf dieser Arbeit nicht weiter betrachtet.
+		
+		\subsection{Paketverlust}
+		\label{subsec:methodik:szenarien:verlust}
+		
+		Beim Szenario ''Paketverlust'' wird in der Emulation ein festgelegter Anteil der Pakete fallengelassen. Mit dem folgenden 				Befehl geht beispielsweise 1 von 1.000 Paketen verloren:\\
+		
+		\begin{lstlisting}
+	# tc qdisc change dev eth0 root netem loss 0.1%
+		\end{lstlisting}
+		
+		\subsection{Doppelte Pakete}
+		\label{subsec:methodik:szenarien:doppelt}
+		
+		Doppelte Pakete können analog zu verlorenen Paketen behandelt werden: \\
+		
+		\begin{lstlisting}
+	# tc qdisc change dev eth0 root netem duplicate 1%
+		\end{lstlisting}
+		
+		\subsection{Begrenzte Bandbreite}
+		\label{subsec:methodik:szenarien:bandbreite}
+		
+		Weiterhin kann die Bandbreite von Client und Server begrenzt werden. In dieser Arbeit werden beide Bandbreiten gleichermaßen 			eingeschränkt. \textcolor{red}{Hier muss wohl noch etwas mehr ergänzt werden.}

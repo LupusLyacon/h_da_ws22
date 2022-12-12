@@ -302,40 +302,4 @@
 }
 
 @Misc{Falcon-HP,
-  author = {Pierre-Alain Fouque and Jeffrey Hoffstein and Paul Kirchner and Vadim Lyubashevsky and Thomas Pornin and Thomas Prest and Thomas Ricosset and Gregor Seiler and William Whyte and Zhenfei Zhang},
-  note   = {Letzter Zugriff am 11.12.2022},
-  title  = {FALCON. Fast-Fourier Lattice-based Compact Signatures over NTRU},
-  url    = {https://falcon-sign.info/},
-}
-
-@Misc{Dilithium-HP,
-  author = {Peter Schwabe},
-  month  = feb,
-  note   = {Letzter Zugriff am 11.12.2022},
-  title  = {CRYSTALS. Cryptographic Suite for Algebraic Lattices},
-  year   = {2021},
-  url    = {https://pq-crystals.org/dilithium/},
-}
-
-@Misc{Bernstein,
-  author = {Daniel Bernstein and Tanja Lange},
-  note   = {Letzter Zugriff am 11.12.2022},
-  title  = {SafeCurves: choosing safe curves for elliptic-curve cryptography},
-  url    = {https://safecurves.cr.yp.to},
-}
-
-@Misc{OQS-Sphincs,
-  author = {{The Open Quantum Safe Project}},
-  note   = {Letzter Zugriff am 11.12.2022},
-  title  = {SPHINCS+},
-  url    = {https://openquantumsafe.org/liboqs/algorithms/sig/sphincs},
-}
-
-@Misc{Sphincs-HP,
-  author = {Jean-Philippe Aumasson and Daniel J. Bernstein and Christoph Dobraunig and Maria Eichlseder and Scott Fluhrer and Stefan-Lukas Gazdag and Panos Kampanakis and Stefan Kölbl and Tanja Lange and Martin M. Lauridsen and Florian Mendel and Ruben Niederhagen and Christian Rechberger and Joost Rijneveld and Peter Schwabe},
-  note   = {Letzter Zugriff am 11.12.2022},
-  title  = {SPHINCS+},
-  url    = {https://sphincs.org/},
-}
-
-@Comment{jabref-meta: databaseType:bibtex;}
+  author 

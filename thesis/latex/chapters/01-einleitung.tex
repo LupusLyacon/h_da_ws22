@@ -47,11 +47,8 @@ In \ac{TLS} 1.3 wird ein Handshake durchgeführt, bei dem ein Schlüsselaustausc
 
 	\begin{itemize}
 		\item Duplikate	
-		\item Jitter
-		\item Korrupte Pakete
 		\item Latenz
 		\item Paketverlust
-		\item Reordering
 		\item Übertragungsrate
 	\end{itemize}
 
@@ -60,13 +57,10 @@ In \ac{TLS} 1.3 wird ein Handshake durchgeführt, bei dem ein Schlüsselaustausc
 	Die eigentliche Authentifizierung wird mithilfe der \ac{OQS} Library \cite{Stebila2017} durchgeführt. Aufgrund des aktuellen Stands der NIST-Empfehlungen werden die folgenden Algorithmen betrachtet:
 	
 	\begin{itemize}
-		\item SPHINCS\textsuperscript{+}
 		\item Dilithium
 		\item Falcon
 	\end{itemize}
 
-	Gegebenenfalls sollen die Ergebnisse in einer realen Netzwerkumgebung mit einem Server aus einer Cloudinstanz bestätigt werden. Dies soll jedoch nicht Kern der Arbeit sein.\\
-	
 	Nach der Durchführung der Versuche sollten ausführliche Daten dazu vorliegen, wie sich die Laufzeit von TLS 1.3 unter verschiedenen Algorithmen, Algorithmenparametern und Netzwerkcharakteristiken verhält. Diese sollen im Anschluss miteinander verglichen werden.\\
 	
-	Dabei werden sich voraussichtlich große Unterschiede zwischen den betrachteten Algorithmen zeigen. Aus dem Vergleich der Performanz von TLS 1.3 soll eine Empfehlung gegeben werden, welche Algorithmen für welche Art von Netzwerk am besten geeignet sind.
+	Dabei werden sich voraussichtlich große Unterschiede zwischen den betrachteten Algorithmen zeigen.

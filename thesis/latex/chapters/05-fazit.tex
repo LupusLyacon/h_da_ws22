@@ -1,0 +1,45 @@
+\chapter{Fazit}
+\label{ch:fazit}
+
+	\section{Allgemeine Dauer des Handshakes}
+	\label{sec:fazit:allgemein}
+	
+	Insgesamt konnte beobachtet werden, dass reine Varianten von Dilithium und Falcon eine bessere Performanz bieten als Varianten, die elliptische Kurven oder RSA verwenden. Außerdem ist dabei zu verzeichnen, dass Varianten, die RSA verwenden, eine höhere Handshake-Dauer haben.\\
+	
+	Positiv zu erwähnen ist, dass Falcon-1.024 trotz seines hohen Sicherheitslevels eine geringe Handshake-Dauer aufweist.
+
+	\section{Latenz}
+	\label{sec:fazit:latenz}
+	
+	In Abschnitt \ref{sec:ergebnis:latenz} konnte ein linearer Zusammenhang zwischen Handshake-Dauer und hinzugefügter Latenz pro Paket beobachtet werden. Hier konnten zwischen den meisten Algorithmen nur geringe Unterschiede in der Performanz festgestellt werden. Eine signifikante Ausnahme bilden die Dilithium-5-Varianten. Diese wiesen eine deutlich höhere Handshake-Dauer auf als die anderen betrachteten Algorithmen.
+	
+	\section{Paketverlust}
+	\label{sec:fazit:verlust}
+	
+	Das Testszenario des Paketverlusts wurde in Abschnitt \ref{sec:ergebnis:verlust} betrachtet. Hier konnten einige Beobachtungen gemacht werden:
+	
+	\begin{enumerate}
+		\item Mit Steigerung der Verlustrate steigt im Allgemeinen auch die Handshake-Dauer.
+		\item Es können einige signifikante Spitzen beobachtet werden, die am deutlichsten bei einer Verlustrate von 17\% bis 18\% auftreten.
+		\item Die beobachteten Spitzen treten stärker bei Algorithmen auf, die elliptische Kurven verwenden.
+		\item Bei einem höheren Sicherheitslevel treten bei hohen Verlustraten größere Spannen in der Performanz auf.
+	\end{enumerate}
+	
+	Bei hohen Verlustraten ist es daher vorteilhaft, eine Variante zu verwenden, die keine elliptischen Kurven verwendet, sodass keine unerwartet langen Handshake-Dauern auftreten.\\
+	
+	Die signifikanten Spitzen in der Handshake-Dauer sind vermutlich auf das Protokoll TCP zurückzuführen. Um dies mit Sicherheit sagen zu können, ist jedoch weitere Arbeit notwendig.
+	
+	\section{Doppelte Pakete}
+	\label{sec:fazit:doppelt}
+	
+	In Abschnitt \ref{sec:ergebnis:doppelt} wurden doppelte Pakete behandelt. Dabei konnte bei höheren Raten doppelter Pakete kaum ein Anstieg der Handshake-Dauer verzeichnet werden. Da die beobachteten Ergebnisse bereits bei sehr geringen Raten doppelter Pakete zu beobachten sind, sind diese durch Unterschiede in der allgemeinen Performanz der Algorithmen ohne Veränderung der Netzwerkparameter zu erklären. Die Ergebnisse dieser Versuchsreihe werden daher in Kapitel \ref{sec:fazit:allgemein}.
+	
+	\section{Begrenzte Bandbreite}
+	\label{sec:fazit:bandbreite}
+	
+	Den größten Einfluss auf die Handshake-Dauer hatte von den betrachteten Netzwerkparametern die Begrenzung der Bandbreite (vgl. Abschnitt \ref{sec:ergebnis:bandbreite}). Hier konnte ein exponenzieller Zusammenhang festgestellt werden. Hier war zu beobachten, dass reine Dilithium- bzw. Falcon-Varianten einen Performanz-Vorteil gegenüber Varianten, die elliptische Kurven nutzen, haben.
+	
+	\section{Empfehlung}
+	\label{sec:fazit:empfehlung}
+
+	Aus Sicht der Performanz ist es aufgrund der Ergebnisse dieser Arbeit zu empfehlen, in einem Netzwerk mit unbekannten Bedingungen, eine reine Falcon- oder Dilithium-Variante zu verwenden. Bei einem hohen Sicherheitsbedürfnis ist Falcon 1.024 zu empfehlen (vgl. Abschnitt \ref{sec:fazit:allgemein} bis \ref{sec:fazit:bandbreite}).

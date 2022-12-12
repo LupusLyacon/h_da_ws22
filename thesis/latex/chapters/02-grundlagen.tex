@@ -214,14 +214,6 @@
 		
 			Um nun eine Signatur prüfen zu können, wird nur eine Zufallszahl des geheimen Schlüssels benötigt. Zusätzlich müssen einige Knoten (in der Abbildung sind dies a\textsubscript{0,1}, a\textsubscript{1,1} und a\textsubscript{2,1}) zusätzlich übermittelt werden.
 			
-			
-			
-			\subsubsection{GMR}
-			\label{subsubsec:grundlagen:krypto:auth:gmr}
-			
-			\subsubsection{DSA}
-			\label{subsubsec:grundlagen:krypto:auth:dsa}
-			
 		\subsection{Kryptographische Zertifikate}
 		\label{subsec:grundlagen:krypto:cert}
 		
@@ -295,9 +287,59 @@
 			Ein ähnliches Verfahren wurde bereits von 1997 bis 2001 durchgeführt.
 			Das Ergebnis des damaligen Verfahrens war die Standardisierung von AES \cite{Schneier2000}.\\
 				
-			\subsubsection{Verlauf}
-			\label{subsubsec:grundlagen:pqc:verfahren:verlauf}
-			
-			\subsubsection{Status}
-			\label{subsubsec:grundlagen:pqc:verfahren:status}
+		\subsubsection{Verlauf}
+		\label{subsubsec:grundlagen:pqc:verfahren:verlauf}
+
+		Das NIST-PQC-Verfahren folgt dabei einem iterativen Ansatz, bei dem bisher 		3 Runden abgeschlossen wurden. Von 69 Kandidaten, die für die erste Runde 			eingereicht wurden, schritten 26 in die zweite und nur 7 Finalisten sowie 			8 Alternativen in die dritte Runde fort. Die Alternativen werden in einer 			vierten Runde weitergehend geprüft.Die eingereichten Algorithmen werden 				anhand verschiedener Angriffe geprüft \cite{Turner2022}.\\
+		
+		Von den 69 eingereichten Kandidaten wiesen viele starke Ähnlichkeiten auf. Gegen viele 			Algorithmen konnten schon früh Angriffe ausgeführt werden, sodass nach einem Jahr nur 26 		Algorithmen in die zweite Runde fortschreiten konnten.\\
+		
+		Die zweite Runde umfasste 18 Monate und enthielt zur bereits in der ersten Runde 					vorhandenen Kryptanalyse auch einen Vergleich der Performance und die Betrachtung 					reeller Anwendungen. Nach der zweiten Runde waren noch 15 Algorithmen übrig, die in die 			dritte Runde fortschreiten durften.\\
+		
+		Diese 15 Algorithmen setzen sich aus 7 Finalisten und 8 Alternativen zusammen. Die 7 				Finalisten waren dabei die Algorithmen, die am vielversprechendsten waren und von denen 			gehofft wurde, dass sie am Ende der dritten Runde bereit für die Standardisierung sind. 			Die 8 Alternativen waren Algorithmen, die nach einer zusätzlichen vierten Runde 					potenziell standardisiert werden könnten.\\
+
+		Diese 15 Algorithmen wurden im Juli 2020 ausgewählt:
+		\begin{center}
+			\begin{tabular}{|l|l|l|}
+				\hline	
+				& Schlüsselaustausch & Digitale Signaturen \\
+				\hline
+				Finalisten & Kyber & Dilithium \\
+				& NTRU & Falcon \\
+				& SABER & Rainbow \\
+				& Classic McEliece &  \\
+				\hline
+				Alternativen & Bike & GeMSS \\
+				& FrodoKEM & Picnic \\
+				& HQC & Sphincs+ \\
+				& NTRUprime & \\
+				& SIKE & \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		Während es größere Debatten um die Sicherheit von xxx gab, wurde Sphics+ als 						''konservative Wahl'' \cite{Gorjan2020} angesehen, mir der, sofern der Fall eintreten sollte, 				dass einige der Algorithmen, die eine bessere Performance haben, sich als unsicher 				herausstellen, dennoch ein sicherer Kandidat für die Standardisierung vorhanden ist. 				Außerdem sollten nach Abschluss der dritten Runde weitere Algorithmen zur digitalen 				Signatur eingereicht werden können \cite{Gorjan2020}.
+
+		\subsubsection{Status}		
+		\label{subsubsec:grundlagen:pqc:verfahren:status}
 	
+		Im Juli 2022 kündigte das \ac{NIST} vier Algoroithmen an, die standardisiert werden sollen, sowie 4 Algorithmen, die eine zusätzliche vierte Runde durchlaufen sollten, an. Dies sind:
+		\begin{center}
+			\begin{tabular}{|l|l|l|}
+				\hline	
+				& Schlüsselaustausch & Digitale Signaturen \\
+				\hline
+				Auswahl & Kyber & Dilithium \\
+				& & Falcon \\
+				& & Sphincs+ \\
+				\hline
+				Runde 4 & BIKE &  \\
+				& Classic McEliece &  \\
+				& HQC &  \\
+				& SIKE & \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		Im Bereich der digitalen Signaturen wurde eine neue Ausschreibung verfasst, in der nach neuen Algorithmen gesucht wird, die eine kurze Signatur und eine schnelle Verifizierung vorweisen können \cite{NIST2022}.
+		
